@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Gallery</title>
+</head>
+<body>
+    <h1>Snapshots</h1>
+    <ul>
+        <li>
+            <a href="images/gamersky_02origin_03_201711416257CE.jpg" title="img1" >img 1</a>
+        </li>
+        <li>
+            <a href="images/gamersky_03origin_05_20173182113C17.jpg" title="img2">img 2</a>
+        </li>
+        <li>
+            <a href="images/gamersky_03origin_05_20176241737492.jpg" title="img3">img 3</a>
+        </li>
+        <li>
+            <a href="images/gamersky_04origin_07_201742921352EA.jpg" title="img4">img 4</a>
+        </li>
+    </ul>
+
+    <img id="placeholder" src="images/gamersky_08origin_15_20171282015551.jpg" alt="placeholder">
+    <p id="description">Choose an image</p>
+<!--
+Goal:
+    - open in original window
+    - hold the list and show the new image
+
+    - childNodes
+    - nodeType:
+        1: element node
+        2: attribute node
+        3: text node
+
+    - event.target
+    - event.preventDefault
+
+    - get/set Attribute
+    - EventListener('event', handler(e), bubble)
+-->
+
+    <script>
+
+        function showPic(whichpic) {
+            const source = whichpic.getAttribute("href");
+            const text = whichpic.getAttribute('title');
+
+            const description = document.getElementById('description');
+            const placeholder = document.getElementById('placeholder');
+            // placeholder.src = source;
+            placeholder.setAttribute('src', source);
+            // description.firstChild.nodeValue = text;
+            description.innerHTML = text;
+        }
+        const lis = document.getElementsByTagName('a');
+
+
+        for(let i = 0; i < lis.length; i++){
+            // lis[i].onclick = () => {
+            //     showPic(lis[i]);
+            //     return false;
+            // }
+
+            lis[i].addEventListener('click', showPic2, false);
+
+        }
+        
+        function showPic2(event) {
+            const ele = event.target;
+            const source = ele.getAttribute('href');
+            const title = ele.getAttribute('title');
+
+            const placeholder = document.getElementById('placeholder');
+            const description = document.getElementById('description');
+
+            placeholder.setAttribute('src', source);
+            description.innerHTML = title;
+            event.preventDefault();
+        }
+
+
+    </script>
+</body>
+</html>
