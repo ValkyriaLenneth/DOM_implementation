@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            color: #333333;
+            background-color: #cccccc;
+            margin: 0;
+        }
+
+        h1  {
+            color: #333;
+            background-color: transparent;
+        }
+        ul{
+            list-style: none;
+            /*
+                flex: for parent selector
+            */
+            display: inline-flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        li {
+            margin: auto 10px;
+            border: 1px dot-dash #333333;
+        }
+
+        a {
+            text-decoration: none;
+            width: 200px;
+            height: 112px;
+        }
+        a img{
+            width: 100%;
+            height: 100%;
+        }
+
+        #placeholder{
+            width: 1000px;
+            height: 562px;
+        }
+        #description {
+            color: lightyellow;
+            font-size: 20px;
+            display: block;
+            margin: 10px auto;
+            width: 200px;
+
+        }
+    </style>
+</head>
+<body>
+    <h1>Snapshots</h1>
+    <ul id="imageGallery">
+        <li>
+            <a href="../images/gamersky_02origin_03_201711416257CE.jpg" title="img1" >
+                <img src="../images/gamersky_02origin_03_201711416257CE.jpg" alt="img1">
+            </a>
+        </li>
+        <li>
+            <a href="../images/gamersky_03origin_05_20173182113C17.jpg" title="img2">
+                <img src="../images/gamersky_03origin_05_20173182113C17.jpg" alt="img2">
+            </a>
+        </li>
+        <li>
+            <a href="../images/gamersky_03origin_05_20176241737492.jpg" title="img3">
+                <img src="../images/gamersky_03origin_05_20176241737492.jpg" alt="img3">
+            </a>
+        </li>
+        <li>
+            <a href="../images/gamersky_04origin_07_201742921352EA.jpg" title="img4">
+                <img src="../images/gamersky_04origin_07_201742921352EA.jpg" alt="img4">
+            </a>
+        </li>
+    </ul>
+
+    <p id="description">Choose an image</p>
+
+    <img id="placeholder" src="../images/gamersky_08origin_15_20171282015551.jpg" alt="placeholder">
+<!--
+Goal:
+    - open in original window
+    - hold the list and show the new image
+
+    - childNodes
+    - nodeType:
+        1: element node
+        2: attribute node
+        3: text node
+
+    - event.target
+    - event.preventDefault
+
+    - get/set Attribute
+    - EventListener('event', handler(e), bubble)
+-->
+
+    <script>
+
+        
+        function showPic2(event) {
+            const ele = event.target;
+            console.log(ele);
+            const source = ele.getAttribute('src');
+            const title = ele.getAttribute('alt');
+
+            const placeholder = document.getElementById('placeholder');
+            const description = document.getElementById('description');
+
+            placeholder.setAttribute('src', source);
+            description.innerHTML = title;
+            event.preventDefault();
+        }
+
+
+    /*
+    addLoadEvent: get ready for window.onload
+     */
+        function addLoadEvent(func){
+            var preLoad = window.onload;
+            if(typeof window.onload != 'function'){
+                window.onload = func;
+            }else{
+                window.onload = function(){
+                    preLoad();
+                    func();
+                }
+            }
+        }
+
+        function prepareGallery() {
+            const gallery = document.getElementById('imageGallery');
+            const links = document.getElementsByTagName('a');
+            for(let i = 0; i < links.length; i++){
+                links[i].addEventListener('click', showPic2, false);
+
+            }
+        }
+        addLoadEvent(prepareGallery());
+    </script>
+</body>
+</html>
