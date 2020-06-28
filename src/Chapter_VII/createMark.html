@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="test">
+<!--    <p>Hello <em>content</em></p>-->
+
+</div>
+
+<script>
+    /*
+        How to create dom element by JS
+     */
+    // 1. a bad way which mixes Structure(HTML) and Action(JS)
+    document.write(
+        "<p>Hello</p>"
+    )
+    // 2. innerHTML: get all HTML in a dom
+    const test = document.getElementById('test');
+    console.log(test.innerHTML);
+    console.log(test.innerText);
+    // 3. createElement: create element node
+    const p = document.createElement('p');
+    test.appendChild(p);
+    // 4. createTextNode: create text node
+    const txt = document.createTextNode('hello');
+    test.appendChild(txt);
+
+    const box = document.createElement('div');
+    test.appendChild(box);
+    const p_mark = document.createElement('p');
+    box.appendChild(p_mark);
+
+    const txt1 = document.createTextNode('hello');
+    const txt2 = document.createTextNode('world');
+    const em_mark = document.createElement('em');
+    const em_text = 'this';
+    em_mark.innerHTML = em_text;
+
+    p_mark.appendChild(txt1);
+    p_mark.appendChild(em_mark);
+    p_mark.appendChild(txt2);
+
+</script>
+</body>
+</html>
